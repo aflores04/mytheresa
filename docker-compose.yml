@@ -10,7 +10,6 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./products.csv:/products.csv
       - ./migrations.sql:/docker-entrypoint-initdb.d/migrations.sql
   app:
     container_name: products_app
