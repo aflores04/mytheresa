@@ -1,4 +1,4 @@
-package model
+package domain
 
 type Price struct {
 	Original	int64	`json:"original"`

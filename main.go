@@ -1,16 +1,44 @@
 package main
 
 import (
+	"github.com/aflores04/mytheresa/products/config"
+	"github.com/aflores04/mytheresa/products/handler"
+	"github.com/aflores04/mytheresa/products/repository"
+	"github.com/aflores04/mytheresa/products/service"
+	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	"log"
 	"net/http"
+	"os"
 )
 
-func Handle(w http.ResponseWriter, r *http.Request)  {
-	log.Println("I'm alive!")
-}
-
 func main() {
-	http.HandleFunc("/", Handle)
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Println(err)
+	}
 
-	_ = http.ListenAndServe(":8080", nil)
+	dbConnection := config.NewDBConnection(
+		os.Getenv("POSTGRES_HOST"),
+		os.Getenv("POSTGRES_PORT"),
+		os.Getenv("POSTGRES_USER"),
+		os.Getenv("POSTGRES_PASSWORD"),
+		os.Getenv("POSTGRES_DATABASE"))
+
+	productsRepository 	:= repository.NewProductRepository(dbConnection)
+	productsService		:= service.NewProductService(productsRepository)
+	productsHandler		:= handler.NewProductsHandler(productsService)
+
+	r := gin.Default()
+
+	r.GET("/products", productsHandler.GetProducts)
+
+	log.Println("products api listening on port 8080")
+
+	err = http.ListenAndServe(":8080", r)
+	if err != nil {
+		log.Println(err)
+	}
+
+
 }
