@@ -37,7 +37,12 @@ func NewDBConnection(
 }
 
 func (c *DBConnectionImpl) GetDB() (*sql.DB, error) {
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%v)/%s?parseTime=true", c.Username, c.Password, c.Host, c.Port, c.Database)
+	dsn := fmt.Sprintf("user=%s "+
+		"password=%s "+
+		"host=%s "+
+		"port=%v "+
+		"dbname=%s "+
+		"sslmode=disable", c.Username, c.Password, c.Host, c.Port, c.Database)
 	db, err := sql.Open("postgres", dsn)
 
 	if err != nil {

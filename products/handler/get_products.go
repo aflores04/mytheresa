@@ -7,7 +7,7 @@ import (
 )
 
 func (h ProductsHandlerImpl) GetProducts(ctx *gin.Context) {
-	getProductsRequest := &request.GetProductRequest{}
+	getProductsRequest := &request.GetProductsRequest{}
 
 	products, err := h.service.GetProducts(getProductsRequest)
 	if err != nil {

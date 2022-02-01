@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/aflores04/mytheresa/products/config"
+	"github.com/aflores04/mytheresa/products/db"
 	"github.com/aflores04/mytheresa/products/handler"
-	"github.com/aflores04/mytheresa/products/repository"
 	"github.com/aflores04/mytheresa/products/service"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -25,9 +25,9 @@ func main() {
 		os.Getenv("POSTGRES_PASSWORD"),
 		os.Getenv("POSTGRES_DATABASE"))
 
-	productsRepository 	:= repository.NewProductRepository(dbConnection)
-	productsService		:= service.NewProductService(productsRepository)
-	productsHandler		:= handler.NewProductsHandler(productsService)
+	productsRepository := db.NewProductRepository(dbConnection)
+	productsService := service.NewProductService(productsRepository)
+	productsHandler := handler.NewProductsHandler(productsService)
 
 	r := gin.Default()
 
@@ -39,6 +39,5 @@ func main() {
 	if err != nil {
 		log.Println(err)
 	}
-
 
 }
