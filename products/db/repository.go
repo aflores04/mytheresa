@@ -6,7 +6,7 @@ import (
 	"github.com/aflores04/mytheresa/products/request"
 )
 
-type ProductsRepository interface {
+type ProductRepository interface {
 	GetProducts(req *request.GetProductsRequest) ([]*domain.Product, error)
 }
 
@@ -14,7 +14,7 @@ type ProductRepositoryImpl struct {
 	DbConnection config.DBConnection
 }
 
-func NewProductRepository(dbConnection config.DBConnection) ProductsRepository {
+func NewProductRepository(dbConnection config.DBConnection) ProductRepository {
 	return &ProductRepositoryImpl{
 		DbConnection: dbConnection,
 	}
