@@ -1,6 +1,6 @@
 package request
 
-type GetProductRequest struct {
-	Category 		string 	`json:"category"`
-	PriceLessThan	int		`json:"price_less_than"`
+type GetProductsRequest struct {
+	Category      *string `json:"category"`
+	PriceLessThan *int64  `json:"price_less_than"`
 }

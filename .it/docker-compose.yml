@@ -1,0 +1,13 @@
+version: '3'
+services:
+  database_test:
+    container_name: postgres_test
+    image: "postgres"
+    environment:
+      - POSTGRES_USER=products_testing_user
+      - POSTGRES_PASSWORD=products_testing_password
+      - POSTGRES_DB=products_testing_database
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./migrations_test.sql:/docker-entrypoint-initdb.d/migrations_test.sql

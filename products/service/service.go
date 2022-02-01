@@ -1,26 +1,26 @@
 package service
 
 import (
-	"github.com/aflores04/mytheresa/products/repository"
+	"github.com/aflores04/mytheresa/products/db"
 	"github.com/aflores04/mytheresa/products/request"
 	"github.com/aflores04/mytheresa/products/response"
 )
 
 type ProductService interface {
-	GetProducts(req *request.GetProductRequest) (*response.GetProductsResponse, error)
+	GetProducts(req *request.GetProductsRequest) (*response.GetProductsResponse, error)
 }
 
 type ProductServiceImpl struct {
-	repository repository.ProductsRepository
+	repository db.ProductsRepository
 }
 
-func NewProductService(repository repository.ProductsRepository) ProductService {
+func NewProductService(repository db.ProductsRepository) ProductService {
 	return &ProductServiceImpl{
 		repository: repository,
 	}
 }
 
-func (s ProductServiceImpl) GetProducts(req *request.GetProductRequest) (*response.GetProductsResponse, error) {
+func (s ProductServiceImpl) GetProducts(req *request.GetProductsRequest) (*response.GetProductsResponse, error) {
 	products, err := s.repository.GetProducts(req)
 	if err != nil {
 		return nil, err
