@@ -37,7 +37,7 @@ func TestProductRepository_GetProducts(t *testing.T) {
 					Category: pointer.ToString("cat1"),
 					Price: &domain.Price{
 						Original: pointer.ToInt64(100),
-						Final:    nil,
+						Final:    pointer.ToInt64(100),
 						Discount: nil,
 						Currency: nil,
 					},
@@ -56,7 +56,7 @@ func TestProductRepository_GetProducts(t *testing.T) {
 					Category: pointer.ToString("cat1"),
 					Price: &domain.Price{
 						Original: pointer.ToInt64(100),
-						Final:    nil,
+						Final:    pointer.ToInt64(100),
 						Discount: nil,
 						Currency: nil,
 					},
@@ -75,7 +75,7 @@ func TestProductRepository_GetProducts(t *testing.T) {
 					Category: pointer.ToString("cat1"),
 					Price: &domain.Price{
 						Original: pointer.ToInt64(100),
-						Final:    nil,
+						Final:    pointer.ToInt64(100),
 						Discount: nil,
 						Currency: nil,
 					},
@@ -92,7 +92,7 @@ func TestProductRepository_GetProducts(t *testing.T) {
 					Category: pointer.ToString("cat1"),
 					Price: &domain.Price{
 						Original: pointer.ToInt64(100),
-						Final:    nil,
+						Final:    pointer.ToInt64(100),
 						Discount: nil,
 						Currency: nil,
 					},
@@ -103,7 +103,7 @@ func TestProductRepository_GetProducts(t *testing.T) {
 					Category: pointer.ToString("cat2"),
 					Price: &domain.Price{
 						Original: pointer.ToInt64(200),
-						Final:    nil,
+						Final:    pointer.ToInt64(200),
 						Discount: nil,
 						Currency: nil,
 					},
