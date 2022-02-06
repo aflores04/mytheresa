@@ -1,20 +1,11 @@
 package service
 
 import (
-	"fmt"
-	"github.com/AlekSi/pointer"
 	"github.com/aflores04/mytheresa/products/db"
 	"github.com/aflores04/mytheresa/products/errors"
 	"github.com/aflores04/mytheresa/products/request"
 	"github.com/aflores04/mytheresa/products/response"
-	"math"
-)
-
-const (
-	Currency               string = "EUR"
-	CategoryWithDiscount   string = "boots"
-	CategoryDiscountAmount int64  = 30
-	SKUDiscount            int64  = 15
+	"github.com/aflores04/mytheresa/products/utils/discounter"
 )
 
 type ProductService interface {
@@ -42,44 +33,20 @@ func (s ProductServiceImpl) GetProducts(req *request.GetProductsRequest) (*respo
 	}
 
 	for _, product := range products {
-		if *product.Category == CategoryWithDiscount {
-			product.Price.Discount = pointer.ToString("%" + fmt.Sprintf("%v", CategoryDiscountAmount))
+		priceDiscounter := discounter.NewDiscounter(*product.Price.Original)
 
-			priceDiscountApplied, err := applyDiscount(*product.Price.Original, CategoryDiscountAmount)
-			if err != nil {
-				return nil, errors.NewError("error when applying discount: %s", err)
-			}
-
-			product.Price.Final = priceDiscountApplied
+		if *product.Category == discounter.CategoryWithDiscount {
+			priceDiscounter.DiscountAmount += discounter.CategoryDiscountAmount
 		}
+
+		if *product.Sku == discounter.SKUWithDiscount {
+			priceDiscounter.DiscountAmount += discounter.SKUDiscountAmount
+		}
+
+		product.Price = priceDiscounter.FillPriceWithDiscount()
 	}
 
 	return &response.GetProductsResponse{
 		Products: products,
 	}, nil
-}
-
-func applyDiscount(number int64, discount int64) (*int64, error) {
-	var (
-		priceWithDecimals float64
-		priceDiscount     float64
-	)
-
-	if number == 0 {
-		return nil, errors.NewError("price cannot be 0", nil)
-	}
-
-	// format number with decimals
-	priceWithDecimals = float64(number / 100)
-
-	// calculate discount amount
-	priceDiscount = (priceWithDecimals * float64(discount)) / 100
-
-	// round to nearest from more than two decimals to only two ... i.e 0.543 -> 0.54
-	round := math.Round(priceDiscount*100) / 100
-
-	// apply discount to price and convert to integer
-	finalPrice := int64((priceWithDecimals - round) * 100)
-
-	return &finalPrice, nil
 }

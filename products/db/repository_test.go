@@ -10,7 +10,6 @@ import (
 )
 
 func TestProductRepository_GetProducts(t *testing.T) {
-	// added connection here because in concordance to the
 	connection := config.NewDBConnection(
 		"127.0.0.1",
 		"5432",

@@ -46,6 +46,7 @@ func (r *ProductRepositoryImpl) GetProducts(req *request.GetProductsRequest) ([]
 	for rows.Next() {
 		product := new(domain.Product)
 		price := new(domain.Price)
+
 		_ = rows.Scan(
 			&product.Sku,
 			&product.Name,
@@ -53,6 +54,7 @@ func (r *ProductRepositoryImpl) GetProducts(req *request.GetProductsRequest) ([]
 			&price.Original,
 		)
 
+		price.Final = price.Original
 		product.Price = price
 
 		products = append(products, product)
