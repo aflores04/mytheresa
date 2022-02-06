@@ -10,7 +10,6 @@ import (
 )
 
 func TestProductRepository_GetProducts(t *testing.T) {
-	// added connection here because in concordance to the
 	connection := config.NewDBConnection(
 		"127.0.0.1",
 		"5432",
@@ -37,10 +36,10 @@ func TestProductRepository_GetProducts(t *testing.T) {
 					Name:     pointer.ToString("test1"),
 					Category: pointer.ToString("cat1"),
 					Price: &domain.Price{
-						Original: 100,
-						Final:    0,
-						Discount: "",
-						Currency: "",
+						Original: pointer.ToInt64(100),
+						Final:    nil,
+						Discount: nil,
+						Currency: nil,
 					},
 				},
 			},
@@ -56,10 +55,10 @@ func TestProductRepository_GetProducts(t *testing.T) {
 					Name:     pointer.ToString("test1"),
 					Category: pointer.ToString("cat1"),
 					Price: &domain.Price{
-						Original: 100,
-						Final:    0,
-						Discount: "",
-						Currency: "",
+						Original: pointer.ToInt64(100),
+						Final:    nil,
+						Discount: nil,
+						Currency: nil,
 					},
 				},
 			},
@@ -75,10 +74,10 @@ func TestProductRepository_GetProducts(t *testing.T) {
 					Name:     pointer.ToString("test1"),
 					Category: pointer.ToString("cat1"),
 					Price: &domain.Price{
-						Original: 100,
-						Final:    0,
-						Discount: "",
-						Currency: "",
+						Original: pointer.ToInt64(100),
+						Final:    nil,
+						Discount: nil,
+						Currency: nil,
 					},
 				},
 			},
@@ -92,10 +91,10 @@ func TestProductRepository_GetProducts(t *testing.T) {
 					Name:     pointer.ToString("test1"),
 					Category: pointer.ToString("cat1"),
 					Price: &domain.Price{
-						Original: 100,
-						Final:    0,
-						Discount: "",
-						Currency: "",
+						Original: pointer.ToInt64(100),
+						Final:    nil,
+						Discount: nil,
+						Currency: nil,
 					},
 				},
 				&domain.Product{
@@ -103,10 +102,10 @@ func TestProductRepository_GetProducts(t *testing.T) {
 					Name:     pointer.ToString("test2"),
 					Category: pointer.ToString("cat2"),
 					Price: &domain.Price{
-						Original: 200,
-						Final:    0,
-						Discount: "",
-						Currency: "",
+						Original: pointer.ToInt64(200),
+						Final:    nil,
+						Discount: nil,
+						Currency: nil,
 					},
 				},
 			},

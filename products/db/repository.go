@@ -6,7 +6,7 @@ import (
 	"github.com/aflores04/mytheresa/products/request"
 )
 
-type ProductsRepository interface {
+type ProductRepository interface {
 	GetProducts(req *request.GetProductsRequest) ([]*domain.Product, error)
 }
 
@@ -14,7 +14,7 @@ type ProductRepositoryImpl struct {
 	DbConnection config.DBConnection
 }
 
-func NewProductRepository(dbConnection config.DBConnection) ProductsRepository {
+func NewProductRepository(dbConnection config.DBConnection) ProductRepository {
 	return &ProductRepositoryImpl{
 		DbConnection: dbConnection,
 	}
@@ -46,6 +46,7 @@ func (r *ProductRepositoryImpl) GetProducts(req *request.GetProductsRequest) ([]
 	for rows.Next() {
 		product := new(domain.Product)
 		price := new(domain.Price)
+
 		_ = rows.Scan(
 			&product.Sku,
 			&product.Name,
@@ -53,6 +54,7 @@ func (r *ProductRepositoryImpl) GetProducts(req *request.GetProductsRequest) ([]
 			&price.Original,
 		)
 
+		price.Final = price.Original
 		product.Price = price
 
 		products = append(products, product)
