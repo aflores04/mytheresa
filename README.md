@@ -53,7 +53,7 @@ Ready! You can test if all went good with
 #### Service Layer:
 - Created apply discount helper to apply percentage discount to a price
 - Logic to get products method in service
-- Created discounter struct to manage the discounts logic and fill price struc
+- Created discounter struct to manage the discounts logic and fill price struct
 - tested with use cases
 
 #### Handler
