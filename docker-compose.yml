@@ -9,6 +9,8 @@ services:
       - "8080:8080"
     depends_on:
       - database
+    networks:
+      - default
   database:
     container_name: postgres
     image: "postgres"
@@ -20,3 +22,5 @@ services:
       - "5432:5432"
     volumes:
       - ./migrations.sql:/docker-entrypoint-initdb.d/migrations.sql
+    networks:
+      - default

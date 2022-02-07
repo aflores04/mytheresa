@@ -23,7 +23,7 @@ func main() {
 		os.Getenv("POSTGRES_PORT"),
 		os.Getenv("POSTGRES_USER"),
 		os.Getenv("POSTGRES_PASSWORD"),
-		os.Getenv("POSTGRES_DATABASE"))
+		os.Getenv("POSTGRES_DB"))
 
 	productsRepository := db.NewProductRepository(dbConnection)
 	productsService := service.NewProductService(productsRepository)
