@@ -38,11 +38,11 @@ Ready! You can test if all went good with
 - Created a migration.sql file that will run after postgres image is up to create database, tables, and insert the data from the exercise
 - Test of db connection
 
-####Service API structure:
+#### Service API structure:
 - A simple structure with a success route from handler to repository
 - Creation of requests and responses that will be used in the respective layers.
 
-####Repository layer:
+#### Repository layer:
 - Started with a repository layer creating the sql queries to represent the business needed.
 - Created a basic layer of db that will have only queries that will be executed in the repository.
 - Filled repository GetProducts method with all necesary to return slice of Product structs
@@ -50,13 +50,13 @@ Ready! You can test if all went good with
 - Added unit tests for queries and integration tests for repository
 - Added app up and down to Makefile, stopping test environment to ensure it will run successfully
 
-####Service Layer:
+#### Service Layer:
 - Created apply discount helper to apply percentage discount to a price
 - Logic to get products method in service
 - Created discounter struct to manage the discounts logic and fill price struc
 - tested with use cases
 
-####Handler
+#### Handler
 - Get Products handler logic
 - Made helper function to parse query string to struct request
 - I can’t do tests for this, but I would have done integration tests
