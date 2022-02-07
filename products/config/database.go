@@ -37,13 +37,20 @@ func NewDBConnection(
 }
 
 func (c *DBConnectionImpl) GetDB() (*sql.DB, error) {
-	dsn := fmt.Sprintf("user=%s "+
-		"password=%s "+
-		"host=%s "+
-		"port=%v "+
-		"dbname=%s "+
-		"sslmode=disable", c.Username, c.Password, c.Host, c.Port, c.Database)
-	db, err := sql.Open("postgres", dsn)
+	url := fmt.Sprintf("postgres://%v:%v@%v:%v/%v?sslmode=disable",
+		c.Username,
+		c.Password,
+		c.Host,
+		c.Port,
+		c.Database)
+	//dsnTwo := fmt.Sprintf("%s:%s@%s:5432/%s?sslmode=disable", c.Username, c.Password, c.Host, c.Database)
+	//dsn := fmt.Sprintf("user=%s "+
+	//	"password=%s "+
+	//	"host=%s "+
+	//	"port=%v "+
+	//	"dbname=%s "+
+	//	"sslmode=disable", c.Username, c.Password, c.Host, c.Port, c.Database)
+	db, err := sql.Open("postgres", url)
 
 	if err != nil {
 		log.Fatalf("cannot open database: %v", err)

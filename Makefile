@@ -2,6 +2,7 @@ dependency:
 	@go get -v ./...
 
 docker-app-up:
+	@docker-compose build
 	@docker-compose up
 
 docker-app-down:
